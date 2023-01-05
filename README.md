@@ -8,6 +8,35 @@ server and parse out Wordle scores. This will be used in a competition-style
 environment, tracking who did the best each day and keeping a running tally of
 who is the Wordle master in the server.
 
+## Technical Info
+
+This runs on the [Sapphire](https://www.sapphirejs.dev/) Framework, which in
+turn utilizes [Discord.js](https://discord.js.org/#/) for interfacing the
+Discord API.
+
+In the code, we use [TypeScript](https://www.typescriptlang.org) with
+[nodemon](https://www.npmjs.com/package/nodemon) for hot reloading.
+
+## Dev Usage
+
+### Pre-reqs
+
+- Node
+- NPM
+- Discord bot token set up in environment variables (TODO)
+
+### Install
+
+``` sh
+npm install
+```
+
+### Run
+
+``` sh
+npm run start
+```
+
 ## Requirements
 
 ### Base

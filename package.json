@@ -1,0 +1,35 @@
+{
+  "name": "wordle-discord-bot",
+  "version": "0.0.0",
+  "description": "A Discord bot for tracking daily Wordle scores in (friendly?) competition",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/segeeslice/wordle-discord-bot.git"
+  },
+  "keywords": [
+    "wordle",
+    "discord",
+    "bot"
+  ],
+  "author": "Dustin Seger, Jared Poston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/segeeslice/wordle-discord-bot/issues"
+  },
+  "homepage": "https://github.com/segeeslice/wordle-discord-bot#readme",
+  "dependencies": {
+    "@sapphire/framework": "^3.1.4",
+    "discord.js": "^13.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
