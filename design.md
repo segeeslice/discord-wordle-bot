@@ -16,7 +16,6 @@ Brainstorming doc for design
         * This would be the # of attempts out of 6
     * Success (bool)
         * Signifies whether or not the puzzle was solved in 6 or fewer attempts
-        * Is this necessary? Probably not?
 * userscores - cross table tracking individual users' scores day-by-day
     *  UserScoreId (pk)
     *  UserId (fk)
@@ -30,4 +29,5 @@ Brainstorming doc for design
 ## Open Questions
 
 * Is userscores necessary or should we just track things like wins on the user record?
+* Does the scores table need to track success or is the score itself enough?
 
