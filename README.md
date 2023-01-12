@@ -23,7 +23,9 @@ In the code, we use [TypeScript](https://www.typescriptlang.org) with
 
 - Node
 - NPM
-- Discord bot token set up in environment variables (TODO)
+- Discord bot token set up in the environment variables for your system
+    - Key = `WORDLE_BOT_AUTH_TOKEN`
+    - Value = *(Contact an existing developer for access)*
 
 ### Install
 
