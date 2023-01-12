@@ -1,7 +1,9 @@
 import { Listener } from '@sapphire/framework';
 import type { Message } from 'discord.js';
 
-const WORDLE_REGEX: RegExp = /(Wordle) (\d+) (\d\/\d)/;
+import wordleResultParser from '../wordleResultParser';
+import storage from '../storage';
+import WordleResult from '../classes/WordleResult';
 
 // Listener for the messageCreate event from discord.js:
 // https://discord.js.org/#/docs/discord.js/v13/class/Client?scrollTo=e-messageCreate
@@ -17,8 +19,13 @@ export class MessageCreateListener extends Listener {
         if (message.author.bot) return;
         if (!message.content) return;
 
-        if (message.content.match(WORDLE_REGEX)) {
-            message.react('👌');
-        }
+        let result: WordleResult | undefined = wordleResultParser.parseWordleResult(
+            message.content,
+            message.author.username);
+
+        if (result == undefined) return;
+
+        storage.saveWordleResult(result);
+        message.react('👌');
     }
 }
