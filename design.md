@@ -10,6 +10,7 @@ Brainstorming doc for design
     * DiscordUsername (varchar)
         * Is this necessary or can we just use Username?
 * scores
+    * ScoreId (PK) 
     * WorldleDay (int)
     * Score (int)
         * This would be the # of attempts out of 6
