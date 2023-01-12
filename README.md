@@ -8,6 +8,14 @@ server and parse out Wordle scores. This will be used in a competition-style
 environment, tracking who did the best each day and keeping a running tally of
 who is the Wordle master in the server.
 
+## Invite Link
+
+Simply use **[this
+link](https://discord.com/oauth2/authorize?client_id=1060656882655694979&permissions=277025466432&scope=bot)**
+to invite the bot to your server.
+
+*(It may or may not do anything yet...)*
+
 ## Technical Info
 
 This runs on the [Sapphire](https://www.sapphirejs.dev/) Framework, which in
@@ -38,6 +46,21 @@ npm install
 ``` sh
 npm run start
 ```
+
+In short, the dev workflow is:
+
+1. Invite the Discord bot to a server using the [link
+above](https://discord.com/oauth2/authorize?client_id=1060656882655694979&permissions=277025466432&scope=bot)
+1. Run the Discord bot locally
+1. From there, the Discord bot will "log in" as its own user where it'll listen
+for commands, etc.
+
+### Deployment
+
+As long as it can log in, it can do all its necessary processing. As such,
+deploying this bot (and all Discord bots) is actually pretty versatile.
+
+_However, a formal process has not been established..._
 
 ## Requirements
 
