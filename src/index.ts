@@ -7,6 +7,9 @@ if (!env.hasOwnProperty(WORDLE_BOT_KEY_NAME)) {
     throw 'FATAL ERROR: The environment variable ' + WORDLE_BOT_KEY_NAME + ' was not found on the system.'
 }
 
-const client = new SapphireClient({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
+const client = new SapphireClient({
+    intents: ['GUILDS', 'GUILD_MESSAGES'],
+    loadMessageCommandListeners: true,
+});
 
 client.login(env[WORDLE_BOT_KEY_NAME]);
