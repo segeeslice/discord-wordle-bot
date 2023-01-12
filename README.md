@@ -55,6 +55,22 @@ above](https://discord.com/oauth2/authorize?client_id=1060656882655694979&permis
 1. From there, the Discord bot will "log in" as its own user where it'll listen
 for commands, etc.
 
+### Making Changes
+
+This repo follows the [Sapphire
+documentation](https://www.sapphirejs.dev/docs/General/Welcome), which should be
+referenced for information on how everything works. At the time of writing,
+nothing special has been done that requires documentation outside of what's
+given in Sapphire's official page.
+
+Some useful notes to keep in mind:
+
+- Events, commands, etc. are added **automatically** based on **directory**
+    - e.g. all commands must be found under `src/commands` and are found
+      automatically in this way
+    - For this reason, `package.json` *must* have an accurate "main" field. This
+      is how it finds the directories
+
 ### Deployment
 
 As long as it can log in, it can do all its necessary processing. As such,
