@@ -2,6 +2,7 @@ import { Listener } from '@sapphire/framework';
 import type { Message } from 'discord.js';
 
 import wordleResultParser from '../wordleResultParser';
+import storage from '../storage';
 import WordleResult from '../classes/WordleResult';
 
 // Listener for the messageCreate event from discord.js:
@@ -24,6 +25,7 @@ export class MessageCreateListener extends Listener {
 
         if (result == undefined) return;
 
+        storage.saveWordleResult(result);
         message.react('👌');
     }
 }

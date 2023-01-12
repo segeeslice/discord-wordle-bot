@@ -1,3 +1,5 @@
+# == Generic Node / TypeScript / NPM ==
+
 # Logs
 logs
 *.log
@@ -105,3 +107,7 @@ dist
 
 # Typescript builds
 build
+
+# == Wordle Bot Specific ==
+
+*scores.json
