@@ -1,7 +1,6 @@
 import WordleResult from './WordleResult';
 
 export class WordleArc {
-
     private _name: string = '';
     public get name() { return this._name; }
     private set name(nameIn: string) {
@@ -16,15 +15,10 @@ export class WordleArc {
         if (!this._startDate) throw 'Invalid Arc Start Date: ' + this._startDate;
     }
 
-    private _endDate: Date = new Date();
+    private _endDate: Date | undefined = undefined;
     public get endDate() { return this._endDate; }
-    private set endDate(dateIn: Date | undefined | null) {
-        if (!dateIn) {
-            this._endDate = new Date();
-        }
-        else {
-            this._endDate = dateIn;
-        }
+    private set endDate(dateIn: Date | undefined) {
+        this._endDate = dateIn;
     }
 
     private _arcResults: WordleResult[] = new Array();
