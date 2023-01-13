@@ -34,7 +34,7 @@ export class WordleArc {
         if (!this._arcResults) this._arcResults = new Array();
      }
 
-    public constructor(nameIn: string, startDate: Date, endDate: Date | undefined, results: WordleResult[]) {
+    public constructor(nameIn: string, startDate: Date, endDate: Date | undefined, results: WordleResult[] = []) {
         this.name = nameIn;
         this.startDate = startDate;
         this.endDate = endDate;
