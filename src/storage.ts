@@ -8,16 +8,13 @@ const DB_INSTANCE = new JsonDB(new Config(DB_NAME, SHOULD_SAVE_AFTER_EACH_PUSH))
 
 
 
-interface UserScoreDetails {
-   score: number
 }
 
-// TODO: update this to save inside of the current arc, since we want results to be tied to ongoing arcs
 function saveWordleResult(wordleResult: WordleResult): Promise<void> {
-    const dataPath = `/${wordleResult.wordleNumber}`;
-    const data: { [key: string]: UserScoreDetails } = {};
-    data[wordleResult.username] = { 'score': wordleResult.score } as UserScoreDetails;
-    const shouldMergeWithExisting = true;
+    const dataPath = `/rawScores/${wordleResult.wordleNumber}/${wordleResult.username}`;
+    const data = {
+        'score': wordleResult.score,
+    };
 
     const shouldMergeWithExisting = true;
     return DB_INSTANCE.push(dataPath, data, shouldMergeWithExisting);
