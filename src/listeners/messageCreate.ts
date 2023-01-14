@@ -39,6 +39,13 @@ export class MessageCreateListener extends Listener {
             return;
         }
 
+        const comparativeResults: { [key: string]: WordleResult } = this.calculateComparativeResults(relatedResults);
+        console.log(comparativeResults);
+
+        message.react('👌');
+    }
+
+    private calculateComparativeResults(relatedResults: {[key: string]: WordleResult}) : { [key: string]: WordleResult } {
         const usernames: Array<string> = Object.keys(relatedResults);
 
         const lowestScore: number = usernames
@@ -62,13 +69,11 @@ export class MessageCreateListener extends Listener {
                 : 0;
 
             comparativeResults[username] = new WordleResult(
-                result.wordleNumber,
+                relatedResult.wordleNumber,
                 relatedResult.username,
                 comparativeScore);
         };
 
-        console.log(comparativeResults);
-
-        message.react('👌');
+        return comparativeResults;
     }
 }
