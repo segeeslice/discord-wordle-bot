@@ -1,13 +1,32 @@
 import { JsonDB, Config } from 'node-json-db';
+
 import WordleArc from './classes/WordleArc';
 import WordleResult from './classes/WordleResult';
+import dateUtils from './dateUtils';
 
 const DB_NAME = "db";
 const SHOULD_SAVE_AFTER_EACH_PUSH = true;
 const DB_INSTANCE = new JsonDB(new Config(DB_NAME, SHOULD_SAVE_AFTER_EACH_PUSH));
 
+async function getWordleResults(wordleNumber: number): Promise<{[key: string]: WordleResult} | undefined> {
+    const dataPath = `/rawScores/${wordleNumber}`;
+    const rawResult: {[key: string]: {[key: string]: number}} | undefined = await DB_INSTANCE.getData(dataPath);
 
+    if (!rawResult) {
+        return undefined;
+    }
 
+    const wordleResults: {[key: string]: WordleResult} = {};
+    for (const username in rawResult) {
+        if (!Object.keys(rawResult[username]).includes('score')) {
+            console.warn(`Received malformatted data for username ${username}: ${rawResult[username]}`);
+            continue;
+        }
+
+        wordleResults[username] = new WordleResult(wordleNumber, username, rawResult[username].score);
+    }
+
+    return wordleResults;
 }
 
 function saveWordleResult(wordleResult: WordleResult): Promise<void> {
@@ -41,6 +60,7 @@ function saveArcInformation(arcInfo: WordleArc): Promise<void> {
 }
 
 export default {
+    getWordleResults,
     saveWordleResult,
     saveArcInformation
 }
