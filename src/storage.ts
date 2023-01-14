@@ -2,18 +2,11 @@ import { JsonDB, Config } from 'node-json-db';
 import WordleArc from './classes/WordleArc';
 import WordleResult from './classes/WordleResult';
 
+const DB_NAME = "db";
 const SHOULD_SAVE_AFTER_EACH_PUSH = true;
+const DB_INSTANCE = new JsonDB(new Config(DB_NAME, SHOULD_SAVE_AFTER_EACH_PUSH));
 
-const RAW_SCORE_DB_NAME = "raw_scores";
-const RAW_SCORE_DB_INSTANCE = new JsonDB(new Config(
-    RAW_SCORE_DB_NAME,
-    SHOULD_SAVE_AFTER_EACH_PUSH));
 
-// TODO: Utilize this to calculate and store comparative scores on each wordle save
-// const COMPARATIVE_SCORE_DB_NAME = "comparative_scores";
-// const COMPARATIVE_SCORE_DB_INSTANCE = new JsonDB(new Config(
-//     COMPARATIVE_SCORE_DB_NAME,
-//     SHOULD_SAVE_AFTER_EACH_PUSH));
 
 interface UserScoreDetails {
    score: number
@@ -26,8 +19,8 @@ function saveWordleResult(wordleResult: WordleResult): Promise<void> {
     data[wordleResult.username] = { 'score': wordleResult.score } as UserScoreDetails;
     const shouldMergeWithExisting = true;
 
-    return RAW_SCORE_DB_INSTANCE.push(dataPath, data, shouldMergeWithExisting);
-}
+    const shouldMergeWithExisting = true;
+    return DB_INSTANCE.push(dataPath, data, shouldMergeWithExisting);
 
 interface ArcInformation {
     startDate: Date,
@@ -39,7 +32,8 @@ function saveArcInformation(arcInfo: WordleArc): Promise<void> {
     const dataPath = `/${arcInfo.name}`;
     const data: { [key: string]: ArcInformation } = {}; 
     data[arcInfo.name] = { 'startDate': arcInfo.startDate, 'endDate': arcInfo.endDate, 'wordleResults': arcInfo.arcResults } as ArcInformation;
-    return RAW_SCORE_DB_INSTANCE.push(dataPath, data, true);
+    const shouldMergeWithExisting = true;
+    return DB_INSTANCE.push(dataPath, data, shouldMergeWithExisting);
 }
 
 export default {
