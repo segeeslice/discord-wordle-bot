@@ -110,4 +110,4 @@ build
 
 # == Wordle Bot Specific ==
 
-*scores.json
+*db.json
