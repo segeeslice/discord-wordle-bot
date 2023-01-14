@@ -19,16 +19,23 @@ function saveWordleResult(wordleResult: WordleResult): Promise<void> {
     const shouldMergeWithExisting = true;
     return DB_INSTANCE.push(dataPath, data, shouldMergeWithExisting);
 
-interface ArcInformation {
-    startDate: Date,
-    endDate: Date | undefined,
-    wordleResults: WordleResult[]
+    // TODO: update this to also save inside of the current arc, since we want
+    //       results to be tied to ongoing arcs
 }
 
 function saveArcInformation(arcInfo: WordleArc): Promise<void> {
-    const dataPath = `/${arcInfo.name}`;
-    const data: { [key: string]: ArcInformation } = {}; 
-    data[arcInfo.name] = { 'startDate': arcInfo.startDate, 'endDate': arcInfo.endDate, 'wordleResults': arcInfo.arcResults } as ArcInformation;
+    const today = dateUtils.getTodaysDateWithoutTime();
+    const baseDataPath : string = arcInfo.startDate >= today
+        ? "/arcs/current"
+        : "/arcs/past";
+    const dataPath: string = `${baseDataPath}/${arcInfo.name}`;
+
+    const data = {
+        'startDate': arcInfo.startDate,
+        'endDate': arcInfo.endDate,
+        'wordleResults': arcInfo.arcResults
+    };
+
     const shouldMergeWithExisting = true;
     return DB_INSTANCE.push(dataPath, data, shouldMergeWithExisting);
 }
