@@ -24,8 +24,7 @@ export class WordleResult {
 
     // == Constructor ==
 
-    public constructor(wordleNumberIn: number, usernameIn: string, scoreIn: number)
-    {
+    public constructor(wordleNumberIn: number, usernameIn: string, scoreIn: number) {
         this.wordleNumber = wordleNumberIn;
         this.username = usernameIn;
         this.score = scoreIn;
