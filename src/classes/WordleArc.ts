@@ -25,7 +25,7 @@ export class WordleArc {
 
     private _arcResults: WordleResult[] = new Array();
     public get arcResults() { return this._arcResults; }
-    private set arcResults(results: WordleResult[]) {
+    public set arcResults(results: WordleResult[]) {
         this._arcResults = results;
         if (!this._arcResults) this._arcResults = new Array();
      }

@@ -59,8 +59,37 @@ function saveArcInformation(arcInfo: WordleArc): Promise<void> {
     return DB_INSTANCE.push(dataPath, data, shouldMergeWithExisting);
 }
 
+async function getCurrentArcs(): Promise<Array<WordleArc>> {
+    const rawArcs: {[key: string]: WordleArc} | undefined = await DB_INSTANCE.getData("/arcs/current");
+    if (rawArcs == undefined) return [];
+
+    const currentArcs: Array<WordleArc> = [];
+    for (const arcName in rawArcs) {
+        const rawArc = rawArcs[arcName];
+        currentArcs.push(new WordleArc(
+            arcName,
+            rawArc.startDate,
+            rawArc.endDate,
+            rawArc.arcResults,
+        ))
+    }
+
+    return currentArcs;
+}
+
+async function updateComparativeResults(comparativeResults: Array<WordleResult>): Promise<void> {
+    const currentArcs: WordleArc[] = await getCurrentArcs();
+
+    if (currentArcs.length == 0) return;
+    for (const i in currentArcs) {
+        currentArcs[i].arcResults = comparativeResults;
+        saveArcInformation(currentArcs[i]);
+    }
+}
+
 export default {
     getWordleResults,
     saveWordleResult,
-    saveArcInformation
+    saveArcInformation,
+    updateComparativeResults,
 }
