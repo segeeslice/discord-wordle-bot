@@ -3,6 +3,7 @@ import { ApplicationCommandRegistry, Command } from '@sapphire/framework';
 import errorUtils from '../errorUtils';
 import dateParser from '../dateParser';
 import WordleArc from '../classes/WordleArc';
+import storage from '../storage';
 
 const START_DATE_OPTION_KEY: string = 'start_date';
 const START_DATE_REQUIRED: boolean = true;
@@ -61,9 +62,8 @@ export class AddArcCommand extends Command {
             return;
         }
 
-        // TODO: Save this in storage
-        console.log(parsedArc);
-        interaction.reply('Arc parsed!');
+        await storage.saveArcInformation(parsedArc);
+        interaction.reply('Arc saved!');
     }
 
     private parseArguments(interaction: Command.ChatInputInteraction) : WordleArc {
