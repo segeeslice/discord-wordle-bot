@@ -1,4 +1,5 @@
 import WordleResult from './WordleResult';
+import dateUtils from '../dateUtils';
 
 export class WordleArc {
     private _name: string = '';
@@ -11,7 +12,7 @@ export class WordleArc {
     private _startDate: Date = new Date();
     public get startDate() { return this._startDate; }
     private set startDate(dateIn: Date) {
-        this._startDate = dateIn;
+        this._startDate = dateUtils.removeTimeFromDate(dateIn);
         if (!this._startDate) throw 'Invalid Arc Start Date: ' + this._startDate;
     }
 
@@ -19,6 +20,7 @@ export class WordleArc {
     public get endDate() { return this._endDate; }
     private set endDate(dateIn: Date | undefined) {
         this._endDate = dateIn;
+        if (this._endDate) dateUtils.removeTimeFromDate(this._endDate);
     }
 
     private _arcResults: WordleResult[] = new Array();
